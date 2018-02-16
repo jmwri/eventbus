@@ -1,11 +1,11 @@
 from distutils.core import setup
 
-github = 'https://github.com/jmwri/eventbus'
+github = 'https://github.com/jmwri/evntbus'
 version = '0.0.1'
 
 setup(
-    name='eventbus',
-    packages=['eventbus'],
+    name='evntbus',
+    packages=['evntbus'],
     version=version,
     license='MIT',
     python_requires='>=3.6, <4',

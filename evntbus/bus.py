@@ -1,6 +1,6 @@
 import typing
 
-from eventbus.event import Event
+from evntbus.event import Event
 
 
 class Bus:

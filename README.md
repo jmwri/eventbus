@@ -1,8 +1,8 @@
-# eventbus
+# evntbus
 
 ## Using the event bus
 ```
-from eventbus import bus, Event
+from evntbus import bus, Event
 
 class UserSignedInEvent(Event):
     def __init__(self, username):

@@ -26,3 +26,17 @@ evntbus.emit(UserSignedInEvent('some_user'))
 In the above example the second listen is triggered first as it's priority is higher that the first listener.
 
 The priority can be any int, and will default at 5.
+
+## Using the `listen` decorator
+
+```
+from evntbus import Event, listen
+
+class UserSignedInEvent(Event):
+    def __init__(self, username):
+        self.username = username
+
+@listen(UserSignedInEvent)
+def first_listener(event):
+    print('First', event.username)
+```

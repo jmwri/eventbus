@@ -2,7 +2,7 @@
 
 ## Using the event bus
 ```
-from evntbus import bus, Event
+from evntbus import evntbus, Event
 
 class UserSignedInEvent(Event):
     def __init__(self, username):
@@ -14,10 +14,10 @@ def first_listener(event):
 def second_listener(event):
     print('Second', event.username)
 
-bus.listen(UserSignedInEvent, first_listener)  # Default priority is 5
-bus.listen(UserSignedInEvent, second_listener, 6)  # Priority is 6
+evntbus.listen(UserSignedInEvent, first_listener)  # Default priority is 5
+evntbus.listen(UserSignedInEvent, second_listener, 6)  # Priority is 6
 
-bus.emit(UserSignedInEvent('some_user'))
+evntbus.emit(UserSignedInEvent('some_user'))
 
 #  Second some_user
 #  First some_user

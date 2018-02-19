@@ -27,7 +27,7 @@ class Bus:
             if priority not in self.listeners[name]:
                 continue
             for listener in self.listeners[name][priority]:
-                listener(event=event)
+                listener(event)
 
     @staticmethod
     def _get_event_name(event: typing.Type) -> str:

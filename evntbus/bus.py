@@ -7,6 +7,9 @@ class Bus:
     def __init__(self):
         self.listeners = {}
 
+    def reset(self):
+        self.listeners = {}
+
     def listen(self, event: typing.Type, listener: typing.Callable,
                priority: int = 5):
         name = self._get_event_name(event)
@@ -23,9 +26,8 @@ class Bus:
         priorities = list(self.listeners[name].keys())
         priorities.sort(reverse=True)
 
+        print('HERE', priorities)
         for priority in priorities:
-            if priority not in self.listeners[name]:
-                continue
             for listener in self.listeners[name][priority]:
                 listener(event)
 

@@ -29,13 +29,16 @@ def event():
 
 
 def test_event(event):
+    evntbus.reset()
     assert event.get_v1() is 1
     assert event.get_v2() is 2
 
 
 def test_listen(event):
-    def increment_v1(event):
-        event.set_v1(2)
+    evntbus.reset()
+
+    def increment_v1(e):
+        e.set_v1(2)
     evntbus.listen(type(event), increment_v1)
     assert event.get_v1() is 1
     evntbus.emit(event)
@@ -43,9 +46,38 @@ def test_listen(event):
 
 
 def test_decorator(event):
+    evntbus.reset()
+
     @listen(type(event))
-    def increment_v1(event):
-        event.set_v1(2)
+    def increment_v1(e):
+        e.set_v1(2)
     assert event.get_v1() is 1
     evntbus.emit(event)
     assert event.get_v1() is 2
+
+
+def test_emit_with_no_listeners(event):
+    evntbus.reset()
+    evntbus.emit(event)
+
+
+def test_priorities(event):
+    evntbus.reset()
+
+    def increment_v1(e):
+        val = e.get_v1()
+        e.set_v1(val + 1)
+
+    @listen(type(event), 4)
+    def run_second(e):
+        assert e.get_v1() is 2
+        increment_v1(e)
+
+    @listen(type(event))
+    def run_first(e):
+        assert e.get_v1() is 1
+        increment_v1(e)
+
+    assert event.get_v1() is 1
+    evntbus.emit(event)
+    assert event.get_v1() is 3

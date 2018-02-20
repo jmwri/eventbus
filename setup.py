@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 github = 'https://github.com/jmwri/evntbus'
-version = '1.1.0'
+version = '1.2.0'
 
 setup(
     name='evntbus',
